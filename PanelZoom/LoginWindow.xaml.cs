@@ -18,6 +18,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Flurl.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace PanelZoom
 {
@@ -40,6 +42,7 @@ namespace PanelZoom
             return sBuilder.ToString();
         }
 
+        
         private void Loggin_Click(object sender, RoutedEventArgs e)
         {
 
@@ -62,7 +65,7 @@ namespace PanelZoom
 
                 token = "token=" + GetHashString(hash);
 
-                WebRequest webRequest = WebRequest.Create("https://panel-rm.yum.pl/API/get_contacts_list.php");
+                WebRequest webRequest = WebRequest.Create(URLS.CONTACT_LIST_URL);
 
                 webRequest.ContentType = "application/x-www-form-urlencoded; charset=utf-8";
                 webRequest.Method = "POST";
@@ -78,7 +81,18 @@ namespace PanelZoom
 
                 string result = streamReader.ReadToEnd();
 
-                label.Content = result + UserPlusPass + " " + token;
+               // label.Content = result + UserPlusPass + " " + token;
+
+                JObject person = JObject.Parse(result);
+                int personCount = person["all_contacts"].Count();
+
+                for(int i = 0; i < personCount; i++)
+                {
+                    Console.WriteLine(person["all_contacts"][i]["contact_name"].ToString() + "\n");
+                }
+
+               
+                
             }
             catch (Exception ex)
             {

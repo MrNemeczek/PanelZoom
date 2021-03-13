@@ -13,5 +13,20 @@ namespace PanelZoom
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+
+
+            OpenLoginWindow();
+        }
+
+        private void OpenLoginWindow()
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+        }
+
     }
+
+    
 }

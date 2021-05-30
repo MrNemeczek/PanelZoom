@@ -53,6 +53,7 @@ namespace PanelZoom
                 string Username;
                 string UserPlusPass;
                 string token;
+                string permissionString;
                 
                 JObject ServerRequestJSON = new JObject();
 
@@ -64,9 +65,13 @@ namespace PanelZoom
                 byte[] sHAPassword = sHA.ComputeHash(Encoding.UTF8.GetBytes(Password));
 
                 ServerRequestJSON.Add("login", Username);
-                ServerRequestJSON.Add("pass", GetHashString(sHAPassword));
+               // ServerRequestJSON.Add("pass", GetHashString(sHAPassword));
+                
 
-                Console.WriteLine(ServerRequestJSON);
+                permissionString = "login=" + Username + "&pass=" + Password;
+
+                //Console.WriteLine(ServerRequestJSON);
+                Console.WriteLine(permissionString);
 
                 UserPlusPass = Username + Password;
 
@@ -83,8 +88,9 @@ namespace PanelZoom
                 ServerOperation serverNotRememberedLogin = new ServerOperation(URLS.USER_ON_LOGIN_URL, "application/x-www-form-urlencoded; charset=utf-8", "POST");
 
                 serverNotRememberedLogin.ServerRequest();
-                serverNotRememberedLogin.ServerWriter(ServerRequestJSON);
-                
+                //serverNotRememberedLogin.ServerWriter(ServerRequestJSON);
+                serverNotRememberedLogin.ServerWriter(permissionString);
+
                 JObject person = serverNotRememberedLogin.ServerReader();
 
                 string wyswietl = person.ToString();

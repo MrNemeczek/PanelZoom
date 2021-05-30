@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PanelZoom"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        Initialized="MainWindow_Initialized">
+        Title="MainWindow" Height="450" Width="800">
     <Grid>
         <ScrollViewer>
             <StackPanel Name="stackpanel"/>

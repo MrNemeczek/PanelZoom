@@ -48,15 +48,25 @@ namespace PanelZoom
 
             try
             {
-                // krzychu_zoom KuZooM1914KRz
+                // krzychu_zoom Skrm1914
                 string Password;
                 string Username;
                 string UserPlusPass;
                 string token;
+                
+                JObject ServerRequestJSON = new JObject();
 
                 Password = PasswordBox.Password;
                 Username = LoginTextBox.Text;
                 Username = Username.ToLower();
+
+                SHA256 sHA = SHA256.Create();
+                byte[] sHAPassword = sHA.ComputeHash(Encoding.UTF8.GetBytes(Password));
+
+                ServerRequestJSON.Add("login", Username);
+                ServerRequestJSON.Add("pass", GetHashString(sHAPassword));
+
+                Console.WriteLine(ServerRequestJSON);
 
                 UserPlusPass = Username + Password;
 
@@ -65,32 +75,34 @@ namespace PanelZoom
 
                 token = "token=" + GetHashString(hash);
 
-                WebRequest webRequest = WebRequest.Create(URLS.CONTACT_LIST_URL);
+                ServerOperation serverContactList = new ServerOperation(URLS.CONTACT_LIST_URL, "application/x-www-form-urlencoded; charset=utf-8", "POST");
 
-                webRequest.ContentType = "application/x-www-form-urlencoded; charset=utf-8";
-                webRequest.Method = "POST";
+                serverContactList.ServerRequest();
+                serverContactList.ServerWriter(token);
 
-                StreamWriter streamWriter = new StreamWriter(webRequest.GetRequestStream());
+                ServerOperation serverNotRememberedLogin = new ServerOperation(URLS.USER_ON_LOGIN_URL, "application/x-www-form-urlencoded; charset=utf-8", "POST");
 
-                streamWriter.Write(token);
-                streamWriter.Flush();
+                serverNotRememberedLogin.ServerRequest();
+                serverNotRememberedLogin.ServerWriter(ServerRequestJSON);
+                
+                JObject person = serverNotRememberedLogin.ServerReader();
 
-                var httpResponse = (HttpWebResponse)webRequest.GetResponse();
+                string wyswietl = person.ToString();
+                Console.WriteLine(wyswietl);
 
-                StreamReader streamReader = new StreamReader(httpResponse.GetResponseStream());
+                int logowanie = int.Parse(person["success"].ToString());
 
-                string result = streamReader.ReadToEnd();
-
-               // label.Content = result + UserPlusPass + " " + token;
-
-                JObject person = JObject.Parse(result);
-                int personCount = person["all_contacts"].Count();
-
-                for(int i = 0; i < personCount; i++)
+                if(logowanie == 1)
                 {
-                    Console.WriteLine(person["all_contacts"][i]["contact_name"].ToString() + "\n");
-                }
+                    MainWindow mainWindow = new MainWindow(person);
 
+                    mainWindow.Show();
+                    Close();
+                }
+                else if(logowanie == 0)
+                {
+                    MessageBox.Show("Złe hasło lub login!");
+                }
                
                 
             }

@@ -14,7 +14,6 @@
             <PasswordBox Name="PasswordBox"/>
             <CheckBox Content="zapamiętaj mnie"/>
             <Button Content="Zaloguj" Click="Loggin_Click"/>
-            <Label Name="label"/>
         </StackPanel>
     </Grid>
 </Window>

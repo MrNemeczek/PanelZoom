@@ -25,32 +25,38 @@ namespace PanelZoom
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(JObject jObject)
+        public MainWindow()
         {        
             InitializeComponent();
-            Creating_Front(jObject);
+            Creating_Front();
         }
 
-        void Creating_Front(JObject dane_z_serwera)
+        void Creating_Front()
         {
-            int Json_counter;
+            int Json_counter; int MyGroup;
 
-            Json_counter = dane_z_serwera["all_contacts"].Count();
+            Json_counter = PublicVariables.contacts["all_contacts"].Count();
+            MyGroup = int.Parse(PublicVariables.person["group"].ToString());
 
             for (int i = 0; i < Json_counter; i++)
             {
                 Button button = new Button();
 
+                button.Height = 30;
+                button.FontSize = 14;
+
                 string zoom_id; string zoom_password; string ContactName; string nadzorca_grupy_imie; string nadzorca_grupy_nazwisko;
 
                 int contact_type;//typ kontaktu (0-specjalny, 1-ukryty, 2-grupowy, 99-prywatny)
+                int contact_group;                
 
-                zoom_id = dane_z_serwera["all_contacts"][i]["zoomlink_id"].ToString();
-                zoom_password = dane_z_serwera["all_contacts"][i]["zoomlink_pass"].ToString();
-                ContactName = dane_z_serwera["all_contacts"][i]["contact_name"].ToString();
-                contact_type = int.Parse(dane_z_serwera["all_contacts"][i]["contact_type"].ToString());
-                nadzorca_grupy_imie = dane_z_serwera["all_contacts"][i]["nad_name"].ToString();
-                nadzorca_grupy_nazwisko = dane_z_serwera["all_contacts"][i]["nad_surname"].ToString();
+                zoom_id = PublicVariables.contacts["all_contacts"][i]["zoomlink_id"].ToString();
+                zoom_password = PublicVariables.contacts["all_contacts"][i]["zoomlink_pass"].ToString();
+                ContactName = PublicVariables.contacts["all_contacts"][i]["contact_name"].ToString();
+                contact_type = int.Parse(PublicVariables.contacts["all_contacts"][i]["contact_type"].ToString());
+                nadzorca_grupy_imie = PublicVariables.contacts["all_contacts"][i]["nad_name"].ToString();
+                nadzorca_grupy_nazwisko = PublicVariables.contacts["all_contacts"][i]["nad_surname"].ToString();
+                contact_group = int.Parse(PublicVariables.contacts["all_contacts"][i]["contact_group"].ToString());
 
                 if (contact_type == 0)
                 {
@@ -68,9 +74,17 @@ namespace PanelZoom
                     button.Foreground = Brushes.Blue;
                 }
 
-                if (nadzorca_grupy_imie.Length > 0 && nadzorca_grupy_nazwisko.Length > 0)
+                if (contact_group != 0)
                 {
-                    button.Content = ContactName + " " + "(" + nadzorca_grupy_imie + " " + nadzorca_grupy_nazwisko + ")";
+                    if (contact_group == MyGroup)
+                    {
+                        button.Content = "MOJA GRUPA" + " " + "(" + nadzorca_grupy_imie + " " + nadzorca_grupy_nazwisko + ")";
+                        button.Foreground = Brushes.Red;
+                    }
+                    else
+                    {
+                        button.Content = ContactName + " " + "(" + nadzorca_grupy_imie + " " + nadzorca_grupy_nazwisko + ")";
+                    }
                 }
 
                 else
@@ -88,6 +102,17 @@ namespace PanelZoom
 
                 stackpanel.Children.Add(button);
             }
+        }
+
+        private void Menu_button_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.CheckBox = false;
+            Properties.Settings.Default.Token = string.Empty;
+            Properties.Settings.Default.Save();
+
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            Close();
         }
     }
 }

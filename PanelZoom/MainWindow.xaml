@@ -3,12 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PanelZoom"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ScrollViewer>
-            <StackPanel Name="stackpanel"/>
-        </ScrollViewer>
+        <Grid HorizontalAlignment="Left" Width="65" Background="#4a6da7">
+            <StackPanel>
+                <ToggleButton Name="menu_button" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" BorderThickness="0" Margin="18" Width="30" Height="30" Click="Menu_button_Click">
+
+                </ToggleButton>
+            </StackPanel>
+        </Grid>
+        <Grid HorizontalAlignment="Right" Width="727" Background="#FFBCD1F3">
+            <ScrollViewer>
+                <StackPanel Name="stackpanel">
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>

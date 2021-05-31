@@ -39,14 +39,6 @@ namespace PanelZoom
             streamWriter.Flush();
         }
 
-        public void ServerWriter(JObject jObject)
-        {
-            streamWriter = new StreamWriter(webRequest.GetRequestStream());
-
-            streamWriter.Write(jObject);
-            streamWriter.Flush();
-        }
-
         public JObject ServerReader()
         {
             JObject response;

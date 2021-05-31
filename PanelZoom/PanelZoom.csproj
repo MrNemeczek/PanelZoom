@@ -140,6 +140,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PublicVariables.cs" />
     <Compile Include="ServerOperation.cs" />
     <Compile Include="URLS.cs" />
     <Page Include="LoginWindow.xaml">

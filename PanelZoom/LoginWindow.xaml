@@ -3,16 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PanelZoom"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="300" Width="300">
+        Title="LoginWindow" Height="300" Width="300" Loaded="Loaded_LoginWindow">
     <Grid>
         <StackPanel Name="stackpanel">
             <Label Content="Login"/>
             <TextBox Name="LoginTextBox"/>
             <Label Content="Hasło"/>
             <PasswordBox Name="PasswordBox"/>
-            <CheckBox Content="zapamiętaj mnie"/>
+            <CheckBox Content="zapamiętaj mnie" Name="RememberMeCheckBox"/>
             <Button Content="Zaloguj" Click="Loggin_Click"/>
         </StackPanel>
     </Grid>

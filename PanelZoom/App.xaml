@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:PanelZoom"
              Startup="Application_Startup">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="DarkBlue" Color="#4a6da7"/>
+        <SolidColorBrush x:Key="LightBlue" Color="#FFBCD1F3"/>
     </Application.Resources>
 </Application>

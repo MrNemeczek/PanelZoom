@@ -4,15 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="300" Width="300" Loaded="Loaded_LoginWindow">
-    <Grid>
+        Title="Logowanie" 
+        Height="300" 
+        Width="300" 
+        Loaded="Loaded_LoginWindow">
+    <Grid Background="{StaticResource LightBlue}">
         <StackPanel Name="stackpanel">
-            <Label Content="Login"/>
+            <Label Content="Login" FontSize="14"/>
             <TextBox Name="LoginTextBox"/>
-            <Label Content="Hasło"/>
+            <Label Content="Hasło" 
+                   FontSize="14"/>
             <PasswordBox Name="PasswordBox"/>
-            <CheckBox Content="zapamiętaj mnie" Name="RememberMeCheckBox"/>
-            <Button Content="Zaloguj" Click="Loggin_Click"/>
+            <CheckBox Content="zapamiętaj mnie"
+                      Name="RememberMeCheckBox" 
+                      FontSize="14"/>
+            <Button Content="Zaloguj" 
+                    Click="Loggin_Click"                   
+                    Background="{StaticResource DarkBlue}" 
+                    Foreground="White"
+                    BorderBrush="Black" 
+                    Height="30" 
+                    FontSize="14"/>
         </StackPanel>
     </Grid>
 </Window>

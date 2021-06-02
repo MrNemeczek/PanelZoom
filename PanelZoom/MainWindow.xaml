@@ -4,20 +4,56 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Panel Zoom" 
+        Height="450" 
+        Width="800"
+        Initialized="Window_Initialized">
     <Grid>
-        <Grid HorizontalAlignment="Left" Width="65" Background="#4a6da7">
+        <Grid HorizontalAlignment="Left" 
+              Width="65" 
+              Background="{StaticResource DarkBlue}"
+              >
             <StackPanel>
-                <ToggleButton Name="menu_button" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" BorderThickness="0" Margin="18" Width="30" Height="30" Click="Menu_button_Click">
-
-                </ToggleButton>
+                <Button Name="Logout_button" 
+                        Grid.Column="0" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Left" 
+                        BorderThickness="0" 
+                        Margin="18" 
+                        Width="30" 
+                        Height="30" 
+                        Click="Logout_button_Click" >
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/Logout_icon.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="Settings_button" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Left" 
+                        BorderThickness="0" 
+                        Margin="18,18,0,18" 
+                        Width="30" 
+                        Height="30" Click="Contacts_button_Click">
+                    <Button.Background>
+                        <ImageBrush x:Name="Settings_Button_Image" 
+                                    ImageSource="Assets/Contacts_icon.png"/>
+                    </Button.Background>
+                </Button>
+                <Button VerticalAlignment="Center" 
+                        HorizontalAlignment="Left" 
+                        BorderThickness="0" 
+                        Margin="18,18,0,18" 
+                        Width="30" 
+                        Height="30" Click="Settings_button_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/Settings_icon.png"/>
+                    </Button.Background>
+                </Button>
             </StackPanel>
         </Grid>
-        <Grid HorizontalAlignment="Right" Width="727" Background="#FFBCD1F3">
-            <ScrollViewer>
-                <StackPanel Name="stackpanel">
-                </StackPanel>
-            </ScrollViewer>
-        </Grid>
+        <Frame HorizontalAlignment="Right" 
+               Width="720"
+               NavigationUIVisibility="Hidden"
+               x:Name="NavigationFrame"/>
     </Grid>
 </Window>

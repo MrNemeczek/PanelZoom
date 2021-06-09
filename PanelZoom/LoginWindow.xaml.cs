@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime;
+using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
@@ -29,19 +31,6 @@ namespace PanelZoom
             InitializeComponent();
         }
 
-        string GetHashString (byte[] hash)
-        {
-            StringBuilder sBuilder = new StringBuilder();
-
-            for (int i = 0; i < hash.Length; i++)
-            {
-                sBuilder.Append(hash[i].ToString("x2"));
-            }
-
-            return sBuilder.ToString();
-        }
-
-        
         private void Loggin_Click(object sender, RoutedEventArgs e)
         {
 
@@ -126,7 +115,34 @@ namespace PanelZoom
 
         private void Loaded_LoginWindow(object sender, RoutedEventArgs e)
         {
-            if (Properties.Settings.Default.CheckBox == true)
+            bool IsInternetLabel = false;
+
+            int Counter = 0;
+
+            while(CheckInternetConnection() == false)
+            {
+                if (Counter == 5)
+                    break;
+
+                if(IsInternetLabel == false)
+                {
+                    Label ConnectionLost = new Label();
+
+                    ConnectionLost.Foreground = Brushes.Red;
+                    ConnectionLost.FontSize = 14;
+                    ConnectionLost.Content = "nie ma połączenia z internetem!";
+
+                    stackpanel.Children.Add(ConnectionLost);
+
+                    Loggin_button.IsEnabled = false;
+
+                    IsInternetLabel = true;
+                }
+
+                Counter++;
+            }
+
+            if (Properties.Settings.Default.CheckBox == true && CheckInternetConnection() == true)
             {
                 string token;
 
@@ -165,6 +181,39 @@ namespace PanelZoom
                     MessageBox.Show("Złe hasło lub login!");
                 }
             }
+        }
+        private bool CheckInternetConnection()
+        {
+            try
+            {
+                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("https://www.google.com/");
+
+                httpWebRequest.Timeout = 5000;
+                httpWebRequest.Credentials = CredentialCache.DefaultNetworkCredentials;
+
+                HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                if (httpWebResponse.StatusCode == HttpStatusCode.OK)
+                    return true;
+                else
+                    return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private string GetHashString(byte[] hash)
+        {
+            StringBuilder sBuilder = new StringBuilder();
+
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sBuilder.Append(hash[i].ToString("x2"));
+            }
+
+            return sBuilder.ToString();
         }
     }
 }

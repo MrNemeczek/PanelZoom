@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:PanelZoom"
              Startup="Application_Startup">
     <Application.Resources>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="Background" Value="#4a6da7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
         <SolidColorBrush x:Key="DarkBlue" Color="#4a6da7"/>
         <SolidColorBrush x:Key="LightBlue" Color="#FFBCD1F3"/>
     </Application.Resources>

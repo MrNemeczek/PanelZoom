@@ -22,29 +22,35 @@
                         Margin="18" 
                         Width="30" 
                         Height="30" 
-                        Click="Logout_button_Click" >
+                        Click="Logout_button_Click" 
+                        ToolTip="Wyloguj się">
                     <Button.Background>
                         <ImageBrush ImageSource="Assets/Logout_icon.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="Settings_button" 
+                <Button x:Name="Contacts_button" 
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Left" 
                         BorderThickness="0" 
                         Margin="18,18,0,18" 
                         Width="30" 
-                        Height="30" Click="Contacts_button_Click">
+                        Height="30" 
+                        Click="Contacts_button_Click"
+                        ToolTip="Kontakty">
                     <Button.Background>
                         <ImageBrush x:Name="Settings_Button_Image" 
                                     ImageSource="Assets/Contacts_icon.png"/>
                     </Button.Background>
                 </Button>
-                <Button VerticalAlignment="Center" 
+                <Button x:Name="Settings_Button"
+                        VerticalAlignment="Center" 
                         HorizontalAlignment="Left" 
                         BorderThickness="0" 
                         Margin="18,18,0,18" 
                         Width="30" 
-                        Height="30" Click="Settings_button_Click">
+                        Height="30" 
+                        Click="Settings_button_Click"
+                        ToolTip="Ustawienia">
                     <Button.Background>
                         <ImageBrush ImageSource="Assets/Settings_icon.png"/>
                     </Button.Background>

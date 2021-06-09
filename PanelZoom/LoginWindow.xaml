@@ -17,14 +17,14 @@
             <PasswordBox Name="PasswordBox"/>
             <CheckBox Content="zapamiętaj mnie"
                       Name="RememberMeCheckBox" 
+                      Margin="0,10"
                       FontSize="14"/>
-            <Button Content="Zaloguj" 
+            <Button Name="Loggin_button"
+                    Content="Zaloguj" 
                     Click="Loggin_Click"                   
-                    Background="{StaticResource DarkBlue}" 
-                    Foreground="White"
-                    BorderBrush="Black" 
-                    Height="30" 
-                    FontSize="14"/>
+                    Style="{StaticResource Button}" 
+                    Margin="60,10"
+                    Height="30" />
         </StackPanel>
     </Grid>
 </Window>

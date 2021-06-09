@@ -20,7 +20,10 @@
             <PasswordBox/>
             <Label Content="Powtórz nowe hasło" FontSize="14"/>
             <PasswordBox/>
-            <Button Content="Zapisz" FontSize="14"/>
+            <Button Content="Zapisz" 
+                    Height="30"
+                    Margin="250, 10"
+                    Style="{StaticResource Button}"/>
 
         </StackPanel>
     </Grid>

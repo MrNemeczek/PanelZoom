@@ -36,7 +36,6 @@ namespace PanelZoom
 
             try
             {
-                // krzychu_zoom Skrm1914
                 string Password;
                 string Username;
                 string UserPlusPass;
